@@ -1,0 +1,184 @@
+{% extends "frame.html" %}
+{% block navi %}
+    {% include "navi.html" %}
+{% endblock navi %}
+{% block main %}
+    <div class="container-xxl px-1 py-2">
+        <div class="row g-2">
+            <div class="col-md-12 col-lg-12 mb-2">
+                <div class="shadow-lg bg-body rounded">
+                    <div class="card d-block border-0">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-bottom mb-2 border-bottom">
+                                <div class="d-flex">
+                                    <div>
+                                        <i class="bi bi-code-slash text-danger fs-4"></i>
+                                        <span class="fs-4">{{ task.id }}</span>
+                                        {% if task.end_time %}
+                                        <span class="text-body-secondary">finished at <span class="text-body-secondary font-monospace text-nowrap">{{ task.end_time.split(".")[0] }}</span></span>
+                                        {% else %}
+                                        <span class="text-body-secondary">created at <span class="text-body-secondary font-monospace text-nowrap">{{ task.created_time.split(".")[0] }}</span></span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-check2-circle" style="color: darkgreen;"></i> ID:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{task.id}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-info-circle" style="color: goldenrod;"></i> TITLE:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{task.title}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-pc-display" style="color: DodgerBlue;"></i> CLIENT:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            <a href="{{ url_for('client.view', name=task.client) }}">{{task.client}}</a>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-cast" style="color: purple;"></i> STATUS:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                        {% if task.status == "QUEUE" %}
+                                            <span class="badge bg-primary">{{ task.status }}</span>
+                                        {% elif task.status == "ONGOING" %}
+                                            <span class="badge bg-warning text-dark">{{ task.status }}</span>
+                                        {% elif task.status == "FINISH" %}
+                                            <span class="badge bg-success">{{ task.status }}</span>
+                                        {% elif task.status == "FAIL" %}
+                                            <span class="badge bg-danger">{{ task.status }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ task.status }}</span>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-flag-fill" style="color: red;"></i> RESULT:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                        {% if task.result == "PASS" %}
+                                            <span class="badge bg-success">{{ task.result }}</span>
+                                        {% elif task.result == "FAIL" %}
+                                            <span class="badge bg-danger">{{ task.result }}</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ task.result }}</span>
+                                        {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-clock" style="color: firebrick;"></i> CREATED TIME:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            <span class="text-body-secondary font-monospace text-nowrap">{{task.created_time.split('.')[0]}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-hourglass-split" style="color:teal;"></i> START TIME:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            {% if task.start_time %}
+                                            <span class="text-body-secondary font-monospace text-nowrap">{{task.start_time.split('.')[0]}}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-calendar-check" style="color: slateblue;"></i> END TIME:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            {% if task.end_time %}
+                                            <span class="text-body-secondary font-monospace text-nowrap">{{task.end_time.split('.')[0]}}</span>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-record-circle" style="color:salmon;"></i> PID:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            {{task.pid}}
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-body-text" style="color: gray;"></i> LOG:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            {{task.log}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    {% if task.command %}
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-end">
+                                                    <div>
+                                                        <i class="bi bi-terminal me-1 fs-4 text-success"></i>
+                                                        <span class="fs-5">Command</span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-end">
+                                                    <a style="color: #E34234;"><code>{{ task.command }}</code></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                {% if task.error %}
+                                <div class="col-md-12 mt-2">
+                                    <div class="card mb-2">
+                                        <div class="card-body">
+                                            <div class="d-flex justify-content-between align-items-end">
+                                                <div>
+                                                    <i class="bi bi-bug me-1 fs-4 text-danger"></i>
+                                                    <span class="fs-5">ERROR</span>
+                                                </div>
+                                            </div>
+                                            <div class="d-flex justify-content-between align-items-end overflow-scroll">
+                                                <a style="color: #E34234;"><code><pre>{{ task.error }}</pre></code></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endif %}
+                                <div class="col-md-12 mt-2">
+                                    {% if task.log %}
+                                        <div class="card mb-2">
+                                            <div class="card-body">
+                                                <div class="d-flex justify-content-between align-items-end">
+                                                    <div>
+                                                        <i class="bi bi-folder-check me-1 fs-4 text-primary"></i>
+                                                        <span class="fs-5">Log</span>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex justify-content-between align-items-end overflow-scroll">
+                                                    <a style="color: #E34234;"><code><pre>{{ task.logfile }}</pre></code></a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main %}

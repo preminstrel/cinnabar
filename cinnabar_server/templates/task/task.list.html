@@ -1,0 +1,48 @@
+{% extends "frame.html" %}
+{% block navi %}
+    {% include "navi.html" %}
+{% endblock navi %}
+{% block main %}
+    <div class="container-xxl px-1 py-2">
+        <div class="shadow g-4 mb-2 bg-body rounded">
+            <div class="card d-block border-0">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-bottom mb-2 border-bottom">
+                        <div class="mb-2">
+                            <span class="h4">TASK</span>
+                            <span class="text-body-secondary">task queue</span>
+                        </div>
+                        <div class="btn-toolbar mb-2">
+                            <a href="{{ url_for('task.create') }}" class="btn btn-sm btn-success me-1" type="button">
+                                <i class="bi bi-plus-circle"></i><span class="d-none d-md-inline ms-1">CREATE</span>
+                            </a> &nbsp;
+                            <a class="btn btn-sm btn-primary me-1" type="button" id="taskDuplicate">
+                                <i class="bi bi-arrow-clockwise"></i><span class="d-none d-md-inline ms-1">DUPLICATE</span>
+                            </a> &nbsp;
+                            <a class="btn btn-sm btn-danger me-1" type="button" id="taskDelete">
+                                <i class="bi bi-trash"></i><span class="d-none d-md-inline ms-1">DELETE</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="table-responsive border rounded p-2">
+                        <table id="taskList"
+                            class="table table-striped display compact w-100"
+                            apiurl="{{ url_for('api_task.list') }}">
+                            <thead>
+                                <tr class="text-body-emphasis">
+                                    <th>ID</th>
+                                    <th>TITLE</th>
+                                    <th>CLIENT</th>
+                                    <th>STATUS</th>
+                                    <th>TIME</th>
+                                    <th>RESULT</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>            
+        </div>
+        <script src="{{ url_for('static', filename='js/task.list.js') }}"></script>
+    </div>
+{% endblock main %}

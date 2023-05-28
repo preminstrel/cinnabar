@@ -1,0 +1,6 @@
+pandas
+flask
+sqlalchemy
+fabric
+paramiko
+termcolor

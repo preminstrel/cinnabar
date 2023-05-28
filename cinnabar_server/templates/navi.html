@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md fixed-top" style="background-color: rgba(227, 66, 52, 0.3);">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ url_for('index.index') }}" id="navIndex"><img src="{{url_for('static', filename='img/cinnabar.png')}}" style="height: 28px;">Cinnabar</a>
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarCollapse"
+                aria-controls="navbarCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if p1=='client' }}" href="{{ url_for('client.index') }}">
+                        <i class="bi bi-hdd-network-fill"></i> client
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ 'active' if p1=='task' }}" href="{{ url_for('task.index') }}">
+                        <i class="bi bi-list-task"></i> task
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

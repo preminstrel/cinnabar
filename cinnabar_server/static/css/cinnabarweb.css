@@ -1,0 +1,67 @@
+body {
+  min-height: 60rem;
+  padding-top: 4.5rem;
+  font-size: 1.1rem;
+}
+
+.dropdown-menu {
+  font-size: 1.1rem;
+}
+
+.overflow-hidden {
+  max-height: 30vh;
+}
+
+.btn {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.btn-sm {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+.btn-group {
+  white-space: nowrap;
+}
+
+.th {
+  font-size: 1.1rem;
+}
+
+td {
+  font-size: 1.1rem;
+}
+
+.breadcrumb-item {
+  font-size: 1.1rem;
+}
+
+.dropdown-item {
+  font-size: 1.1rem;
+}
+
+.page-link {
+  font-size: 1.1rem;
+}
+
+.accordion {
+  white-space: normal;
+}
+
+.form-control-sm {
+  font-size: 1.1rem;
+}
+
+.form-select-sm {
+  font-size: 0.8rem;
+}
+
+.form-check-label {
+  font-size: 1.1rem;
+}
+
+.font-monospace {
+  font-size: 0.9rem;
+}

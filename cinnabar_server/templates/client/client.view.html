@@ -1,0 +1,176 @@
+{% extends "frame.html" %}
+{% block navi %}
+    {% include "navi.html" %}
+{% endblock navi %}
+{% block main %}
+    <div class="container-xxl px-1 py-2">
+        <div class="row g-2">
+            <div class="col-md-12 col-lg-12 mb-2">
+                <div class="shadow-lg bg-body rounded">
+                    <div class="card d-block border-0">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-bottom mb-2 border-bottom">
+                                <div class="d-flex">
+                                    <div>
+                                        {% if client.os %}
+                                            {% if 'Ubuntu' in client.os %}
+                                                <i class="bi bi-ubuntu fs-4" style="color: tomato"></i>
+                                            {% else %}
+                                                <i class="bi bi-circle-fill text-danger fs-4"
+                                                    data-bs-toggle="tooltip"
+                                                    data-bs-title="status:{{ client.status }}"></i>
+                                            {% endif %}
+                                        {% endif %}
+                                        <span class="fs-4">{{ client.name }}</span>
+                                        <span class="text-body-secondary">last seen <span class="text-body-secondary font-monospace text-nowrap">{{ client.timestamp.split(".")[0] }}</span></span>
+                                    </div>
+                                </div>
+                                <div class="btn-toolbar mb-2 justify-content-end">
+                                    <div class="btn-group me-2 mb-2">
+                                        <a type="button"
+                                            class="btn btn-sm" style="background-color:rgba(227, 66, 52, 0.5);"
+                                            href="{{ url_for('client.view', name=client.name, redirect='ssh') }}">
+                                            <i class="bi bi-terminal"></i><span class="d-none d-md-inline"> SSH</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-hdd-fill" style="color:cadetblue;"></i> NAME:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{client.name}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong<i class="bi bi-router-fill" style="color: darkgreen;"></i> IP:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary"><span class="text-body-secondary font-monospace text-nowrap">{{client.ip}}</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-person-bounding-box" style="color: mediumpurple;"></i> USER:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{client.user}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-server" style="color: sienna;"></i> HOSTNAME:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{client.hostname}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-power" style="color: red;"></i> STATUS:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">
+                                            {% if client.status =='online' %}
+                                                <i class="bi-toggle-on text-success"> {{client.status}}</i>
+                                            {% else %}
+                                                <i class="bi bi-toggle-off text-danger"> {{client.status}}</i>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-robot" style="color: rgb(139, 130, 0);"></i> OS:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{client.os}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-cpu-fill" style="color: DarkCyan;"></i> CPU:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{client.cpu}}</div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <strong><i class="bi bi-memory" style="color: SlateBlue;"></i> MEMORY:</strong>
+                                        </div>
+                                        <div class="col-auto text-body-secondary">{{ client.memory.used_memory }} GB/{{ client.memory.total_memory }} GB</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    <div class="row">
+                                        <div class="col">
+                                            <h5><img src ="{{url_for('static',filename ='icons/anaconda-color.svg')}}" style="height: 1.3rem;"/> CONDA ENVS:</h5>
+                                        </div>
+                                            <div class="col-auto text-body-secondary">
+                                        <code>{{client.condaEnvs}}</code>
+                                    </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 mt-2">
+                                    {% if client.gpu %}
+                                        {% for k,v in client.gpu.items() %}
+                                            <div class="card mb-2">
+                                                <div class="card-body">
+                                                    <div class="d-flex justify-content-between align-items-end">
+                                                        <div>
+                                                            <i class="bi bi-gpu-card me-1 fs-4 text-success"></i>
+                                                            <span class="fs-5">{{ k }}</span>
+                                                            <span class="text-body-secondary">{{ v.name }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="d-flex justify-content-between align-items-end">
+                                                        <span class="fs-5"><i class="bi bi-speedometer"></i> Memory <a style="color: #E34234;">{{ v.memory_used }}GB</a> /{{ v.memory_total }}GB</span>
+                                                        <span class="fs-5"><i class="bi bi-fan"></i> Utilization<a style="color: #E34234;">{{ v.utilization }}%</a></span>
+                                                        <span class="fs-5"><i class="bi bi-thermometer-half"></i> Temperature<a style="color: #E34234;">{{ v.temperature }}°C</a></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 mb-2">
+                <div class="container-xxl px-1 py-2">
+                    <div class="shadow g-4 mb-2 bg-body rounded">
+                        <div class="card d-block border-0">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-bottom mb-2 border-bottom">
+                                    <div class="mb-2">
+                                        <span class="h4">TASK</span>
+                                        <span class="text-body-secondary">task queue</span>
+                                    </div>
+                                    <div class="btn-toolbar mb-2">
+                                        <a href="{{ url_for('task.create') }}" class="btn btn-sm btn-success me-1" type="button">
+                                            <i class="bi bi-plus-circle"></i><span class="d-none d-md-inline ms-1">CREATE</span>
+                                        </a>
+                                        <a class="btn btn-sm btn-danger me-1" type="button" id="taskDelete">
+                                            <i class="bi bi-trash"></i><span class="d-none d-md-inline ms-1">DELETE</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="table-responsive border rounded p-2">
+                                    <table id="taskList"
+                                        class="table table-striped display compact w-100"
+                                        apiurl="{{ url_for('api_task.list', client=client.name) }}">
+                                        <thead>
+                                            <tr class="text-body-emphasis">
+                                                <th>ID</th>
+                                                <th>TITLE</th>
+                                                <th>CLIENT</th>
+                                                <th>STATUS</th>
+                                                <th>TIME</th>
+                                                <th>RESULT</th>
+                                            </tr>
+                                        </thead>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>            
+                    </div>
+                <script src="{{ url_for('static', filename='js/task.list.js') }}"></script>
+        </div>
+    </div>
+{% endblock main %}

@@ -1,0 +1,21 @@
+{% extends "frame.html" %}
+{% block navi %}
+    {% include "navi.html" %}
+{% endblock navi %}
+{% block main %}
+    <body class="d-flex h-100 text-body">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <div class="px-4 pt-5 text-center">
+                <h1 class="display-4 fw-bold"><img src="{{url_for('static', filename='img/cinnabar.png')}}" style="height:65px;">Cinnabar</h1>
+                <p class="lead mb-4">Efficiently monitor GPU resources and schedule tasks for optimal performance.</p>
+                <div class="d-grid gap-2 d-md-flex justify-content-sm-center">
+                    <div class="card border-5">
+                        <div class="card-body text" style="background-color: rgba(227, 66, 52, 0.1);">
+                            <span style="color: green;">git</span> clone https://github.com/preminstrel/cinnabar.git
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+{% endblock main %}

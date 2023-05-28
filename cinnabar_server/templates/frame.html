@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="Hanshi Sun (hanshi.sun@outlook.com)" />
+        <meta name="keywords" content="cinnabar" />
+        {# ICON #}
+        <link rel="icon" href="{{ url_for('static', filename='img/cinnabar.ico') }}" />
+        <title>Cinnabar</title>
+        {# Bootstrap core CSS #}
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/static/icons/bootstrap-icons.css" rel="stylesheet"/>
+        <link href="/static/css/datatables.min.css" rel="stylesheet"/>
+        <link href="{{ url_for('static', filename='css/cinnabarweb.css') }}"
+              rel="stylesheet"/>
+        {# Javascripts #}
+        <script src="/static/js/bootstrap.bundle.min.js"></script>
+        <script src="/static/js/jquery-3.6.1.min.js"></script>
+        <script src="/static/js/datatables.min.js"></script>
+    </head>
+    <body class="container-fluid bg-body-tertiary">
+        {# top navi bar #}
+        {% block navi %}
+        {% endblock navi %}
+        {# main #}
+        {% block main %}
+        {% endblock main %}
+    </body>
+    <div class="row">
+        <p class="text-center">© 2023 Hanshi Sun &nbsp;
+            <a href="https://github.com/preminstrel/cinnabar"
+            class="text-body px-2"><i class="bi bi-github"></i> GitHub</a>
+            <a href="mailto:hanshi.sun@outlook.com" class="text-body px-2"><i class="bi bi-envelope"></i> Email</a></p>
+    </div>
+</html>

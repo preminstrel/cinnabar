@@ -1,0 +1,59 @@
+{% extends "frame.html" %}
+{% block navi %}
+    {% include "navi.html" %}
+{% endblock navi %}
+{% block main %}
+<div class="container-xxl p-2">
+    <div class="container-fluid px-1 py-2">
+        <div class="row">
+            <div class="shadow p-2 mb-2 bg-body rounded">
+                <div class="card d-block border-0" style="margin: auto;">
+                    <div class="row mb-3">
+                        <h2>Create</h2>
+                        <hr style="width:97%; margin: auto;" />
+                    </div>
+                    <form class="was-validated" method="post" action="{{ url_for('api_task.create')}}" >
+                            <div class="row mb-2">
+                                <div class="col-6">
+                                    <label for="clientSelect" class="form-label">Client</label>
+                                    <select class="form-select" name="client" id="clientSelect" required>
+                                        <option selected disabled value="">Choose...</option>
+                                        {% for client in clients %}
+                                            <option>
+                                                {{ client.name }}
+                                            </option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-6">
+                                    <label for="titleInput" class="form-label">Title</label>
+                                    <input type="text" class="form-control" name="title" id="titleInput" required>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <label for="envInput" class="form-label">Conda Env (optional)</label>
+                                    <input type="text" class="form-control" name="env" id="envInput">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    <label for="commandInput" class="form-label">Command</label>
+                                    <input type="text" class="form-control" name="command" id="commandInput" required>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col-md-5 col-lg-4">
+                                </div>
+                                <div class="col-md-7 col-lg-8">
+                                    <button type="submit" class="btn btn-primary col-lg-6">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock main %}
