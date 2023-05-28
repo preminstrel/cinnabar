@@ -4,3 +4,4 @@ sqlalchemy
 fabric
 paramiko
 termcolor
+apscheduler

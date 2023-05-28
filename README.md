@@ -1,7 +1,7 @@
 <div>
     <center>
-        <h1><img src="cinnabar_server/static/img/cinnabar.png" style="height:65px;">Cinnabar</h1>
-        <p>Efficiently monitor GPU resources and schedule tasks for optimal performance.</p>
+        <h1 align="center"><img src="cinnabar_server/static/img/cinnabar.png" style="height:65px;">Cinnabar</h1>
+        <p align="center">Efficiently monitor GPU resources and schedule tasks for optimal performance.</p>
     </center>
 </div>
 

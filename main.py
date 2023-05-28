@@ -1,6 +1,5 @@
 import click
 from cinnabar_server import create_app as server_app
-#from cinnabar_client import app as client_app
 
 @click.command()
 @click.option('--port', default=8500, help='Port number')
