@@ -2,7 +2,7 @@ import click
 from cinnabar_server import create_app as server_app
 
 @click.command()
-@click.option('--port', default=8500, help='Port number')
+@click.option('--port', default=3010, help='Port number')
 @click.option('--host', default='127.0.0.1', help='Host address')
 def main(port, host):
     """Run the Cinnabar Flask application"""

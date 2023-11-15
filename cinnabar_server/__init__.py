@@ -11,8 +11,8 @@ import datetime
 import time
 from sqlalchemy.dialects.postgresql import insert
 
-from cinnabar.error import cuda_out_of_memory
-from cinnabar.watcher import get_hostnames_and_ips_from_ssh_config, get_gpu_status, get_cpu_status, get_memory_status, get_os, get_hostname, get_free_gpu, get_conda_envs
+from .error import cuda_out_of_memory
+from .watcher import get_hostnames_and_ips_from_ssh_config, get_gpu_status, get_cpu_status, get_memory_status, get_os, get_hostname, get_free_gpu, get_conda_envs
 
 from .database import get_db, tabClient, tabTask
 from .api_task import api_task_list_pure

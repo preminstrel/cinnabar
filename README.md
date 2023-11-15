@@ -25,9 +25,15 @@ Run the cinnabar server:
 cinnabar
 ```
 
-Then visit `http://localhost:8500` in your browser.
+Then visit `http://localhost:3010` in your browser.
 
 If you want to use debug mode, run:
 ```bash
-flask --app cinnabar_server --debug run --port 8500 --host 127.0.0.1
+flask --app cinnabar_server --debug run --port 3010 --host 127.0.0.1
+```
+
+If you want to run background, you can use the `.plist` file.
+```bash
+cp cinnabar.plist ~/Library/LaunchAgents/
+launchctl load ~/Library/LaunchAgents/cinnabar.plist
 ```

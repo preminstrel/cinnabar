@@ -160,8 +160,12 @@ def get_os(connection):
         os_dict = {}
 
         for line in os_lines:
-            key, value = line.split('=', 1)
-            os_dict[key] = value.strip('"')
+            if '=' in line:
+                #print(line)
+                key, value = line.split('=', 1)
+                os_dict[key] = value.strip('"')
+            else:
+                continue
 
         pretty_name = os_dict.get('PRETTY_NAME')
         if pretty_name:

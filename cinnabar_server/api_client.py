@@ -28,7 +28,7 @@ def api_client_list() -> dict:
                 memory_used = gpu_info['memory_used']
                 memory_total = gpu_info['memory_total']
                 util = gpu_info['utilization']
-                gpu_status += f"<i class=\"bi bi-gpu-card\"></i> {memory_used}GB/{memory_total}GB | Util {util}%\n"
+                gpu_status += f"<i class=\"bi bi-nvidia text-success\"></i> {memory_used}GB/{memory_total}GB | Util {util}%\n"
             client['gpu'] = gpu_status
         if client['memory']:
             client['memory'] = f"{client['memory']['used_memory']}GB/{client['memory']['total_memory']}GB"
